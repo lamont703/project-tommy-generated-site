@@ -1,5 +1,124 @@
 <!DOCTYPE html>
-    <html>
-    <head><meta charset="UTF-8"><title>Project Tommy Default Page</title></head>
-    <body><h1>Project Tommy Default Page</h1></body>
-    </html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Project Tommy Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+:root {
+--bg: #0f172a;
+--card: #111827;
+--accent: #38bdf8;
+--text: #e5e7eb;
+--muted: #94a3b8;
+}
+
+* {
+box-sizing: border-box;
+font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+margin: 0;
+min-height: 100vh;
+background: linear-gradient(135deg, #020617, #020617 40%, #0f172a);
+color: var(--text);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 24px;
+}
+
+.card {
+background: rgba(17, 24, 39, 0.85);
+backdrop-filter: blur(12px);
+border-radius: 16px;
+padding: 32px;
+max-width: 520px;
+width: 100%;
+box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+border: 1px solid rgba(56,189,248,0.2);
+}
+
+h1 {
+margin-top: 0;
+font-size: 1.8rem;
+color: var(--accent);
+}
+
+p {
+color: var(--muted);
+line-height: 1.6;
+}
+
+.status {
+margin-top: 24px;
+padding: 16px;
+border-radius: 12px;
+background: #020617;
+border: 1px dashed rgba(56,189,248,0.4);
+font-family: monospace;
+font-size: 0.95rem;
+white-space: pre-wrap;
+}
+
+button {
+margin-top: 24px;
+padding: 14px 20px;
+border-radius: 10px;
+border: none;
+background: var(--accent);
+color: #020617;
+font-weight: 600;
+cursor: pointer;
+transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:hover {
+transform: translateY(-1px);
+box-shadow: 0 8px 20px rgba(56,189,248,0.4);
+}
+
+footer {
+margin-top: 28px;
+font-size: 0.8rem;
+color: var(--muted);
+opacity: 0.7;
+text-align: center;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+<h1>🚀 Project Tommy</h1>
+
+<p>
+This page was generated dynamically via:
+<br />Notion → Webhook → Supabase Edge → GitHub API → GitHub Pages
+</p>
+
+<button id="actionBtn">Run Prototype Action</button>
+
+<div class="status" id="status">
+Status: Awaiting interaction…
+</div>
+
+<footer>
+Generated at <span id="timestamp"></span>
+</footer>
+</div>
+
+<script>
+(function () {
+const statusEl = document.getElementById("status");
+const timestampEl = document.getElementById("timestamp");
+const actionBtn = document.getElementById("actionBtn");
+
+const now = new Date();
+timestampEl.textContent = now.toISOString();
+
+function log(message) {
+const time = new Date().toLocaleTimeString();
+statusEl.textContent += 
